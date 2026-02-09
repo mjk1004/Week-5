@@ -8,7 +8,7 @@ var prevImg;
 var currImg;
 var diffImg;
 var spotImg;
-var threshold = 0.1; // *** change sensitivity (decimal between 0 - 1)
+var threshold = 0.04; // *** I changed it to high sensitivity
 var grid;
 
 function setup() {
@@ -100,7 +100,7 @@ function mousePressed() {
 
 var Grid = function (_w, _h) {
   this.diffImg = 0;
-  this.noteWidth = 10; // *** change spacing between each point
+  this.noteWidth = 7; // *** I changed it to more space
   this.worldWidth = _w;
   this.worldHeight = _h;
   this.numOfNotesX = int(this.worldWidth / this.noteWidth);
@@ -114,8 +114,8 @@ var Grid = function (_w, _h) {
 
   for (var i = 0; i < this.arrayLength; i++) {
     this.colorArray.push(
-      color(218, 165, 32, 150) // *** set colours of the points
-      //lerpColor(color(218, 165, 32, 150), color(72, 61, 139, 150), 0.0009 * i)
+      //color(218, 165, 32, 150) // *** I changed the colours to 'lerpcolor' with pink and mint
+      lerpColor(color(255, 153, 204, 150), color(204, 255, 255, 150), 0.0009 * i)
     );
   }
 
@@ -140,7 +140,7 @@ var Grid = function (_w, _h) {
     }
 
     for (var i = 0; i < this.arrayLength; i++) {
-      this.noteStates[i] -= 0.08; // *** set how long points take to disappear (decimal between 0 - 1)
+      this.noteStates[i] -= 0.2; // *** I changed it to disappear soon (decimal between 0 - 1)
       this.noteStates[i] = constrain(this.noteStates[i], 0, 1);
     }
 
@@ -158,7 +158,7 @@ var Grid = function (_w, _h) {
 
         if (this.noteStates[noteIndex] > 0) {
           fill(this.colorArray[noteIndex]);
-          ellipse(posX, posY, camera.width / 20, camera.height / 20); // *** change shape of point
+          circle(posX, posY, camera.width / 20, camera.height / 20); // *** I changed the shape to a circle
         }
       }
     }
